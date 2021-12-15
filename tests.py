@@ -1,6 +1,52 @@
 from random_brain import random_brain
 import os
+import unittest
 
+
+brain = random_brain()
+
+
+class TestStringMethods(unittest.TestCase):
+
+    # test if we can import a whole dir of models
+    def test_import_dir(self):
+        import_path = os.path.join(os.getcwd()+ '/testing_models') 
+        brain.import_models(model_path=import_path)
+        self.assertEqual(brain.show_brain(), os.listdir(os.path.join(os.getcwd()+ '/testing_models')))
+
+    # test if we can import a single model
+    def test_import_single(self):
+        pass
+
+
+    def test_import_single_and_dir(self):
+        pass
+
+
+    def test_classification(self):
+        pass
+
+
+    def test_regression(self):
+        pass
+
+
+    def test_save_brain(self):
+        pass
+
+
+    def test_load_brain(self):
+        pass
+
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+# migrate below to above for automated testing
+
+'''
 if __name__ == "__main__":
     # run tests
 
@@ -46,3 +92,4 @@ if __name__ == "__main__":
     # make prediction with imported brain (regression)
 
 
+'''

@@ -33,7 +33,7 @@ class random_brain:
         else:
             raise Exception('Path mush be in format \'xxxxx.pkl\'')
 
-    # Import models (keras)  # model.save(os.getcwd()+'/saved models/model.h5') 
+    # Import models (keras)  # format of saved model: model.save(os.getcwd()+'/saved models/model.h5') 
     def import_models(self, model_path=None):
         # ignore if no model has been selected
         if model_path == None:
@@ -44,14 +44,14 @@ class random_brain:
         if '.h5' not in model_path:
             dir = os.listdir(model_path)
             for model in dir:
-                self.brain[model] = keras.models.load_model(model)
+                self.brain[model] = keras.models.load_model(os.path.join(model_path, model))
         else:
             # this is a single file
             self.brain[model_path] = keras.models.load_model(model_path)
 
     # Show imported models
     def show_brain(self):
-        print(self.brain)
+        return list(self.brain.keys())
 
     # Clear list or one item
     def clear_brain(self, item_list=[]):
@@ -73,7 +73,7 @@ class random_brain:
 
         if prediction_input == None:
             raise Exception('Need to send in input')
-        for model in self.brain.values:
+        for model in self.brain.values():
              votes.append(model.predict(prediction_input))
 
         print(votes)
