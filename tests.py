@@ -3,40 +3,46 @@ import os
 import unittest
 
 
-brain = random_brain()
-
-
 class TestStringMethods(unittest.TestCase):
 
     # test if we can import a whole dir of models
     def test_import_dir(self):
+        brain = random_brain()
         import_path = os.path.join(os.getcwd()+ '/testing_models') 
         brain.import_models(model_path=import_path)
-        self.assertEqual(brain.show_brain(), os.listdir(os.path.join(os.getcwd()+ '/testing_models')))
+        self.assertEqual(brain.show_brain(), os.listdir(os.path.join(os.getcwd() + '/testing_models')))
 
     # test if we can import a single model
     def test_import_single(self):
-        pass
+        brain = random_brain()
+        import_path = os.path.join(os.getcwd()+ '/testing_models/eeg_eye_state.h5') 
+        brain.import_models(model_path=import_path)
+        self.assertEqual(brain.show_brain(), os.path.join(os.getcwd() + '/testing_models/eeg_eye_state.h5').split('!')) # need to change the ! delimeter, but should work if no ! in path. Just needs to be a list with one item
 
-
+    # import a single item and a whole dir
     def test_import_single_and_dir(self):
-        pass
+        brain = random_brain()
+
 
 
     def test_classification(self):
-        pass
+        brain = random_brain()
+
 
 
     def test_regression(self):
-        pass
+        brain = random_brain()
+
 
 
     def test_save_brain(self):
-        pass
+        brain = random_brain()
+
 
 
     def test_load_brain(self):
-        pass
+        brain = random_brain()
+
 
 
 

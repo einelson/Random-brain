@@ -34,6 +34,7 @@ class random_brain:
             raise Exception('Path mush be in format \'xxxxx.pkl\'')
 
     # Import models (keras)  # format of saved model: model.save(os.getcwd()+'/saved models/model.h5') 
+    # This will not handle duplicates
     def import_models(self, model_path=None):
         # ignore if no model has been selected
         if model_path == None:
@@ -51,6 +52,7 @@ class random_brain:
 
     # Show imported models
     def show_brain(self):
+        # print(self.brain)
         return list(self.brain.keys())
 
     # Clear list or one item
