@@ -14,7 +14,37 @@ pip install random-brain
 ```
 
 ## API
+To init the brain:
+```
+brain = random_brain()
+```
 
+import models()
+```
+brain.import_models(model_path = 'path to model.h5)
+```
+Import models will take in a directory or a single .h5 file. Sub directories will be ignored.
+
+show_brain()
+```
+brain.show_brain()
+```
+Shows the keys used in the brain. This should just be the name of each imported model
+
+
+clear_brain()
+```
+brain.clear_brain(item_list = ['model to remove'])
+```
+Clear a single model or more by entering in the model name as a list. Leave blank to clear all models.
+
+predict
+```
+brain.predict(yTest = [1, 2, 3, 4, ...])
+```
+Add in your yTest to make predictions. The prediction function will currently only return the votes cast and not an actual prediction.
+
+In the future prediction and threading options will be added and improved.
 
 ## Disclaimer
 The random brain module is in no way a production ready module. This is intended as a research experiment to easily implement random forest style forecasting for neural networks. 
