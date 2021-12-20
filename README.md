@@ -14,31 +14,31 @@ pip install random-brain
 ```
 
 ## API
-To init the brain:
+init the brain
 ```
 brain = random_brain()
 ```
 
-import models()
+**import models()**
 ```
 brain.import_models(model_path = 'path to model.h5)
 ```
 Import models will take in a directory or a single .h5 file. Sub directories will be ignored.
 
-show_brain()
+**show_brain()**
 ```
 brain.show_brain()
 ```
 Shows the keys used in the brain. This should just be the name of each imported model
 
 
-clear_brain()
+**clear_brain()**
 ```
 brain.clear_brain(item_list = ['model to remove'])
 ```
 Clear a single model or more by entering in the model name as a list. Leave blank to clear all models.
 
-predict
+**predict**
 ```
 brain.predict(yTest = [1, 2, 3, 4, ...])
 ```
