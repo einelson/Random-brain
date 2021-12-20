@@ -1,6 +1,7 @@
 # test file
 import os
 import pickle
+import numpy as np
 from tensorflow import keras
 
 
@@ -13,25 +14,21 @@ class random_brain:
 
     # save brain
     def save_brain(self, path='random_brain.pkl'):
+        return 0
         if '.pkl' in path:
-            try:
-                with open(path, 'wb') as f:
-                    pickle.dump(self.brain, f)
-            except:
-                raise Exception('Unable to save brain as pkl')
+            with open(path, 'wb') as f:
+                pickle.dump(self.brain, f, pickle.HIGHEST_PROTOCOL)
         else:
             raise Exception('Path mush be in format \'xxxxx.pkl\'')
 
     # load brain
     def load_brain(self, path='random_brain.pkl'):
+        return 0
         if '.pkl' in path:
-            try:
-                with open('saved_dictionary.pkl', 'rb') as f:
-                    self.brain = pickle.load(f)
-            except:
-                raise Exception('Unable to open pkl')
+            with open(path, 'rb') as f:
+                self.brain = pickle.load(f)
         else:
-            raise Exception('Path mush be in format \'xxxxx.pkl\'')
+            raise Exception('Path mush be in format \'xxxxx.pkl\'') 
 
     # Import models (keras)  # format of saved model: model.save(os.getcwd()+'/saved models/model.h5') 
     # This will not handle duplicates
@@ -45,10 +42,18 @@ class random_brain:
         if '.h5' not in model_path:
             dir = os.listdir(model_path)
             for model in dir:
-                self.brain[model] = keras.models.load_model(os.path.join(model_path, model))
+                try:
+                    self.brain[model] = keras.models.load_model(os.path.join(model_path, model))
+                except:
+                    # print(f'Unable to import {model}, skipping')
+                    pass
         else:
             # this is a single file
-            self.brain[model_path] = keras.models.load_model(model_path)
+            # these next 2 lines are a bit barbaric but work for me. Need to convert this to something better and more robust like regex
+            model_path_name = model_path.replace('/', ' ')
+            model_path_name = model_path_name.replace('\\', ' ').split(' ')[-1]
+            
+            self.brain[model_path_name] = keras.models.load_model(model_path)
 
     # Show imported models
     def show_brain(self):
@@ -58,6 +63,7 @@ class random_brain:
     # Clear list or one item
     def clear_brain(self, item_list=[]):
         # clearing one item or many
+        # print(self.brain)
         if item_list == []:
             self.brain = {}
         else:
@@ -67,24 +73,13 @@ class random_brain:
                 except:
                     raise Exception(f'Unable to remove item: {item}')
 
-
     # Make a prediction
-    def predict(self, get_vote=False, threaded=False, prediction_input=None): # maybe add in argument for regression or classification based answer
+    def predict(self, yTest=[], get_vote=False, threaded=False): # maybe add in argument for regression or classification based answer
         # thread predictions?
         votes = []
 
-        if prediction_input == None:
-            raise Exception('Need to send in input')
         for model in self.brain.values():
-             votes.append(model.predict(prediction_input))
+             votes.append(model.predict(yTest))
 
-        print(votes)
-        # look for majority 
-        # majority of bools or ints
-
-        # if no majority and classification return a pseudo random answer
-
-        # if no majority and regression return average?
-
-        pass
+        return np.stack(votes) 
 

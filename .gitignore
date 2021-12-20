@@ -1,4 +1,3 @@
 __pycache__
 .vscode
-testing_models
-testing_data
+*.pkl
