@@ -124,7 +124,7 @@ class TestStringMethods(unittest.TestCase):
 
 
         # run predictions
-        votes = brain.predict(xTest)
+        votes = brain.vote(xTest)
 
         # find the mean of votes (should add this natively into brain)
         votes = votes.mean(axis=0)

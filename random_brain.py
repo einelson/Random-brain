@@ -73,9 +73,8 @@ class random_brain:
                 except:
                     raise Exception(f'Unable to remove item: {item}')
 
-    # Make a prediction
-    def predict(self, yTest=[], get_vote=False, threaded=False): # maybe add in argument for regression or classification based answer
-        # thread predictions?
+    # get votes
+    def vote(self, yTest=[], threaded=False):
         votes = []
 
         for model in self.brain.values():
@@ -83,3 +82,22 @@ class random_brain:
 
         return np.stack(votes) 
 
+    # make predictions
+    def predict(self, yTest=[],threaded=False, classes=None):
+        votes = []
+
+        for model in self.brain.values():
+            votes.append(model.predict(yTest))
+
+        votes = np.stack(votes)
+
+        # find average of votes
+        votes = votes.mean(axis=0)
+
+        if classes == None:
+            # this is regression
+            return votes
+        else:
+            # this is for classification only
+            return keras.utils.np_utils.to_categorical(votes, num_classes=classes)
+            

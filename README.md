@@ -38,11 +38,17 @@ brain.clear_brain(item_list = ['model to remove'])
 ```
 Clear a single model or more by entering in the model name as a list. Leave blank to clear all models.
 
+**Vote**
+```
+brain.vote(yTest = [1, 2, 3, 4, ...])
+```
+Add in yTest to cast votes. Vote() will only return the votes as a numpy array and not actual predictions. This is useful if you want to run statistics on the votes
+
 **predict**
 ```
 brain.predict(yTest = [1, 2, 3, 4, ...])
 ```
-Add in your yTest to make predictions. The prediction function will currently only return the votes cast and not an actual prediction.
+Add in your yTest to make predictions. This will attempt to make a prediction based off of the networks and will return a numpy array of answers
 
 In the future prediction and threading options will be added and improved.
 
