@@ -2,7 +2,7 @@
 import os
 import pickle
 import numpy as np
-from tensorflow import keras
+import keras
 
 
 # Class to act as random brain for neural networks
@@ -84,6 +84,7 @@ class random_brain:
 
     # make predictions
     def predict(self, yTest=[],threaded=False, classes=None):
+        print('Please note that predict is still under construction/testing. I would recommend using random_brain.vote() until predict() is completed')
         votes = []
 
         for model in self.brain.values():
