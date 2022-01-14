@@ -1,7 +1,7 @@
 from setuptools import setup
 
-setup(name='random_brain',
-    version='0.1.0',
+setup(name='random-brain',
+    version='0.1.1',
     description='Python Random Brain Module',
 
     author='Ethan Nelson',
@@ -11,10 +11,15 @@ setup(name='random_brain',
     install_requires=['numpy', 'keras'],
 
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Science/Research',
-        "Programming Language :: Python :: 3",
-        "License :: OSI Approved:: MIT License",
-        "Operating System :: OS Independent",
+        'Programming Language :: Python :: 3 :: Only',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: OS Independent',
         ],
 )
+
+# notes
+# python setup.py sdist
+# python setup.py bdist_wheel
+# twine upload dist/*
