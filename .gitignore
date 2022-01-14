@@ -1,4 +1,6 @@
 __pycache__
 .vscode
 random_brain.egg-info
+build
+dist
 *.pkl
